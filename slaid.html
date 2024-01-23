@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f8f8f8;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="gallery" class="gallery">
+        <button onclick="showPrevImage()">Previous</button>
+        <img id="currentImage" src="image1.jpg" alt="Image 1">
+        <button onclick="showNextImage()">Next</button>
+    </div>
+    <script>
+        const images = ["image1.jpg", "image2.jpg", "image3.jpg"]; 
+        let currentIndex = 0;
+
+        const currentImage = document.getElementById('currentImage');
+
+        function showPrevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateImage();
+        }
+
+        function showNextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateImage();
+        }
+
+        function updateImage() {
+            const imageUrl = images[currentIndex];
+            currentImage.src = imageUrl;
+            currentImage.alt = `Image ${currentIndex + 1}`;
+        }
+
+        updateImage();
+    </script>
+</body>
+</html>
